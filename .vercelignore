@@ -1,0 +1,13 @@
+# so o site vai para a Vercel: index.html + img/
+node_modules
+dist
+shots
+qr
+qr-laser
+.claude
+*.md
+servidor.js
+build.js
+shot.js
+qr.js
+qr-laser.js
