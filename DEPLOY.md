@@ -42,14 +42,14 @@ Ele vai perguntar. As respostas que importam:
 | Set up and deploy? | `y` |
 | Which scope? | sua conta |
 | Link to existing project? | `n` |
-| **What's your project's name?** | **`catalogo-3dtouch`** |
+| **What's your project's name?** | **`catalogo-feira3dtouchxtool`** |
 | In which directory is your code? | `./` |
 | Want to modify these settings? | `n` |
 
-> ⚠️ **O nome do projeto é o que vira o endereço.** A pasta local se chama
-> `catalogo-expo3d`, então a Vercel vai sugerir esse nome — **não aceite**.
-> Digite `catalogo-3dtouch`, senão o endereço sai `catalogo-expo3d.vercel.app`
-> e o QR que já está gerado não serve.
+> ⚠️ **O nome do projeto é o que vira o endereço.** Hoje o projeto se chama
+> `catalogo-feira3dtouchxtool`. Se você renomear em Settings → General → Project
+> Name, o endereço muda junto e **o QR gravado no acrílico para de funcionar**.
+> Decida o nome antes de gravar.
 
 ### 4. Deploy de produção
 
@@ -64,12 +64,12 @@ vercel --prod
 O terminal imprime o endereço de produção. Ele **precisa** ser exatamente:
 
 ```
-https://catalogo-3dtouch.vercel.app
+https://catalogo-feira3dtouchxtool.vercel.app
 ```
 
 Abre no celular e confere que o catálogo carrega.
 
-Se o nome `catalogo-3dtouch` já estiver ocupado por outra conta, a Vercel devolve
+Se o nome `catalogo-feira3dtouchxtool` já estiver ocupado por outra conta, a Vercel devolve
 outro endereço (com sufixo). **Nesse caso o QR já gerado não vale** — pula para
 "Se o endereço mudar", no fim deste arquivo.
 
@@ -90,7 +90,7 @@ Se preferir que cada `git push` publique sozinho:
 1. `git init && git add . && git commit -m "catálogo 3D Touch"`
 2. Cria um repositório no GitHub e dá `git push`
 3. Em vercel.com → **Add New → Project → Import** o repositório
-4. Em **Project Name**, digita `catalogo-3dtouch`
+4. Em **Project Name**, digita `catalogo-feira3dtouchxtool`
 5. Framework Preset: **Other**. Sem build command, sem output directory.
 6. **Deploy**
 
@@ -99,10 +99,28 @@ O `.gitignore` e o `.vercelignore` já estão prontos: só `index.html`, `img/` 
 
 ---
 
+## Se as imagens não aparecerem
+
+Sintoma: o texto do catálogo carrega, mas nenhuma foto aparece. Foi o que
+aconteceu no primeiro deploy — o `.vercelignore` tinha uma linha de comentário
+terminada em `img/`, e a pasta inteira deixou de subir. Já corrigido: o arquivo
+agora não tem comentário e ainda traz `!img` explícito no fim.
+
+Para conferir depois de qualquer deploy, abra o console do navegador no site e
+rode:
+
+```js
+[...document.images].filter(i => !i.complete || i.naturalWidth === 0).length
+```
+
+Tem que dar **0**. Se der 79, a pasta `img/` não subiu.
+
+---
+
 ## Parte 2 — Gravar o QR no acrílico
 
 Os arquivos estão em `qr-laser/`, gerados para
-`https://catalogo-3dtouch.vercel.app`:
+`https://catalogo-feira3dtouchxtool.vercel.app`:
 
 | Arquivo | Quando usar |
 |---|---|
@@ -152,7 +170,7 @@ preto, que é o caminho mais direto.
 - **Tamanho mínimo.** 60 mm lê de longe. Se quiser menor, regere com o tamanho
   certo em vez de reduzir na máquina:
   ```bash
-  node qr-laser.js "https://catalogo-3dtouch.vercel.app" 40 Q
+  node qr-laser.js "https://catalogo-feira3dtouchxtool.vercel.app" 40 Q
   ```
   Abaixo de 30 mm começa a ficar exigente com a câmera.
 - **Teste com o celular sujo de dedo**, na luz do ambiente onde a placa vai ficar.
